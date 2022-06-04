@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# MongoURI details
+/config/default.json
