@@ -2,9 +2,12 @@ const express = require('express');
 const connectDB = require('./config/db');
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 //Connect to database
-connectDB();
+    connectDB();
+
+//Init Middleware
+app.use(express.json({extended:false}));
 
 //Defining Routes
 app.use('/api/v1/users', require('./routes/users'));
