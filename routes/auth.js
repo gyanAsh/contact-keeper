@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const authVerify = require('../middleware/auth');
 
 const User = require('../models/User');
 
@@ -11,8 +12,15 @@ const { body, validationResult } = require('express-validator');
 // @route   GET api/v1/auth
 // @desc    Get logged in user
 // @access  Private
-router.get('/', (req, res) => {
-    res.send('Get logged in user');
+router.get('/', authVerify, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error!");
+    }
+    
 })
 
 // @route   POST api/v1/auth
