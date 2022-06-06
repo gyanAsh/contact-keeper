@@ -46,7 +46,7 @@ router.post('/', [authVerify, [
 // @route   PUT api/v1/contacts:id
 // @desc    Update existing contact
 // @access  Private
-router.put('/:id', authVerify, (req, res) => {
+router.put('/:id', authVerify, async (req, res) => {
     const { name, email, phone, type } = req.body;
     const contactFields = {};
     if (!name) contactFields.name = name;
@@ -80,8 +80,8 @@ router.put('/:id', authVerify, (req, res) => {
 // @route   DELETE api/v1/contacts:id
 // @desc    Delete existing contact
 // @access  Private
-router.delete('/:id', (req, res) => {
-    res.send('Delete existing contact');
+router.delete('/:id',(req, res) => {
+    
 })
 
 module.exports = router;
