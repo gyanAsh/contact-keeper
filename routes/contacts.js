@@ -35,7 +35,7 @@ router.post('/', [authVerify, [
 
     try {
         const newUser = new Contact({ name, email, phone, type, user: req.user.id });
-        const contact = await Contact.save(newUser);
+        const contact = await newUser.save();
         res.json(contact);
     } catch (error) {
         console.error(error.message);
@@ -46,8 +46,35 @@ router.post('/', [authVerify, [
 // @route   PUT api/v1/contacts:id
 // @desc    Update existing contact
 // @access  Private
-router.put('/:id', (req, res) => {
-    res.send('Update existing contact');
+router.put('/:id', authVerify, (req, res) => {
+    const { name, email, phone, type } = req.body;
+    const contactFields = {};
+    if (!name) contactFields.name = name;
+    if (!email) contactFields.email = email;
+    if (!phone) contactFields.phone = phone;
+    if (!type) contactFields.type = type;
+    
+    try {
+        const contact = await Contact.findById(req.params.id);
+        
+        if (!contact) {
+            return res.status(404).send("Contact not found");
+        }
+        if (req.user.id !== contact.user.toString()) {
+            return res.status(401).send("Unautherised User");
+        }
+
+        contact = await Contact.findByIdAndUpdate(req.params.id,
+            { $set: contactFields },
+            {new : true}
+        )
+
+        return res.json(contact);
+        
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send("Server Error");
+    }
 })
 
 // @route   DELETE api/v1/contacts:id
