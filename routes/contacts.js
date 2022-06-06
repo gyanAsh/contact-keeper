@@ -49,19 +49,19 @@ router.post('/', [authVerify, [
 router.put('/:id', authVerify, async (req, res) => {
     const { name, email, phone, type } = req.body;
     const contactFields = {};
-    if (!name) contactFields.name = name;
-    if (!email) contactFields.email = email;
-    if (!phone) contactFields.phone = phone;
-    if (!type) contactFields.type = type;
+    if (name) contactFields.name = name;
+    if (email) contactFields.email = email;
+    if (phone) contactFields.phone = phone;
+    if (type) contactFields.type = type;
     
     try {
-        const contact = await Contact.findById(req.params.id);
+        let contact = await Contact.findById(req.params.id);
         
         if (!contact) {
             return res.status(404).send("Contact not found");
         }
         if (req.user.id !== contact.user.toString()) {
-            return res.status(401).send("Unautherised User");
+            return res.status(401).send("Unauthorized User");
         }
 
         contact = await Contact.findByIdAndUpdate(req.params.id,
@@ -80,7 +80,22 @@ router.put('/:id', authVerify, async (req, res) => {
 // @route   DELETE api/v1/contacts:id
 // @desc    Delete existing contact
 // @access  Private
-router.delete('/:id',(req, res) => {
+router.delete('/:id',authVerify,async(req, res) => {
+    try {
+        let contact = await Contact.findById(req.params.id);
+        if (!contact) {
+            return res.status(404).json({ msg: "Contact not found" });
+        }
+        if (req.user.id !== contact.user.toString()) {
+            return res.status(401).json({ msg: "Unauthorized User" });
+        }
+
+        await Contact.findByIdAndDelete(req.params.id);
+        res.json({ msg: "Contact Removed" });
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send("Server Error");
+    }
     
 })
 
