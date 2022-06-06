@@ -14,13 +14,6 @@ const { body, validationResult } = require('express-validator');
 router.post('/',
     body('name', "Name is required").not().isEmpty(),
     body('email', "Valid email is required").isEmail(),
-        // .custom(value => {
-        //     return User.findUserByEmail(value)
-        //         .then(user => {
-        //             if (user)
-        //                 return Promise.reject('Email already used');
-        //         })
-        // }),
     body('password', "Password of length atleast 6 is required").isLength({min:6})
     , async (req, res) => {
         const errors = validationResult(req);
