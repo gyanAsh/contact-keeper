@@ -8,8 +8,11 @@ import {
 } from 'react-router-dom';
 import About from './Components/Pages/About';
 import Home from './Components/Pages/Home';
+import ContactState from './Context/Contact/ContactState'
+
 const App = () => {
   return (
+    <ContactState>
     <Router>
     <Fragment>
         <Navbar />
@@ -19,8 +22,9 @@ const App = () => {
             <Route exact path='/about' element={<About/>}/>
           </Routes>
         </div>
-      </Fragment>
+    </Fragment>
     </Router>
+    </ContactState>
   );
 }
 

@@ -1,8 +1,16 @@
 import React from 'react'
-
+import Contacts from '../Contacts/Contacts'
+import ContactForm from '../Contacts/ContactForm'
 const Home = () => {
   return (
-    <div>Home</div>
+    <div className="grid-2">
+      <div>
+        <ContactForm/>
+      </div>
+      <div>
+        <Contacts/>
+      </div>
+    </div>
   )
 }
 
