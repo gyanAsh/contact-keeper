@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     ADD_CONTACT,
     DELETE_CONTACT ,
@@ -9,7 +8,7 @@ import {
     CLEAR_FILTER 
 } from '../Types';
 
-export default ( state, action ) => {
+const ContactReducer =( state, action ) => {
     switch (action.type) {
         case ADD_CONTACT:
             return {
@@ -21,6 +20,15 @@ export default ( state, action ) => {
                 ...state,
                 contacts: state.contacts.filter(contact => contact.id !== action.payload)
             }
+        case UPDATE_CONTACT:
+            return {
+                ...state,
+                contacts: state.contacts.map(contact => {
+                    if (contact.id == action.payload.id)
+                        return action.payload;
+                    return contact;
+                })
+            }
         case SET_CURRENT:
             return {
                 ...state,
@@ -31,18 +39,21 @@ export default ( state, action ) => {
                 ...state,
                 current:null
             }
-        case UPDATE_CONTACT:
+        case FILTER_CONTACTS:
             return {
                 ...state,
-                contacts: state.contacts.map(contact => {
-                    if (contact.id == action.payload.id)
-                        return action.payload;
-                    return contact;
+                filtered: state.contacts.filter(contact => {
+                    const regex = new RegExp(`${action.payload}`, 'gi');
+                    return contact.name.match(regex) || contact.email.match(regex);
                 })
+            }
+        case CLEAR_FILTER:
+            return {
+                ...state,
+                filtered:null
             }
         default:
             return state;
     }
-
-    return
 }
+export default ContactReducer;
