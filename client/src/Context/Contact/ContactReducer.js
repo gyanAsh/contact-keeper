@@ -24,7 +24,7 @@ const ContactReducer =( state, action ) => {
             return {
                 ...state,
                 contacts: state.contacts.map(contact => {
-                    if (contact.id == action.payload.id)
+                    if (contact.id === action.payload.id)
                         return action.payload;
                     return contact;
                 })
