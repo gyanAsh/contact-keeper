@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 import About from './Components/Pages/About';
 import Home from './Components/Pages/Home';
+import Register from './Components/Auth/Register';
+import Login from './Components/Auth/Login';
 import ContactState from './Context/Contact/ContactState'
 import AuthState from './Context/Auth/AuthState';
 
@@ -22,6 +24,8 @@ const App = () => {
           <Routes>
             <Route exact path='/' element={<Home/>}/>
             <Route exact path='/about' element={<About/>}/>
+            <Route exact path='/register' element={<Register/>}/>
+            <Route exact path='/login' element={<Login/>}/>
           </Routes>
         </div>
     </Fragment>
