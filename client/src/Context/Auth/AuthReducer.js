@@ -12,10 +12,10 @@ import {
 
 const AuthReducer = (state,action) => {
     switch (action.type) {
-        case Aup:
+        case "Aup":
             return {
                 ...state,
-                sup:sup
+                user:null
             }
     }
     
