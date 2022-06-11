@@ -10,28 +10,33 @@ import About from './Components/Pages/About';
 import Home from './Components/Pages/Home';
 import Register from './Components/Auth/Register';
 import Login from './Components/Auth/Login';
+import Alerts from './Components/layout/Alerts';
 import ContactState from './Context/Contact/ContactState'
 import AuthState from './Context/Auth/AuthState';
+import AlertState from './Context/Alert/AlertState';
 
 const App = () => {
   return (
     <AuthState>
-    <ContactState>
+      <ContactState>
+        <AlertState>
     <Router>
     <Fragment>
         <Navbar />
-        <div className="container">
+              <div className="container">
+                <Alerts/>
           <Routes>
             <Route exact path='/' element={<Home/>}/>
             <Route exact path='/about' element={<About/>}/>
             <Route exact path='/register' element={<Register/>}/>
             <Route exact path='/login' element={<Login/>}/>
           </Routes>
-        </div>
+              </div>
     </Fragment>
     </Router>
+         </AlertState>
       </ContactState>
-      </AuthState>
+     </AuthState>
   );
 }
 
