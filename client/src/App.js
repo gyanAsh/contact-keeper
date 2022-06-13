@@ -11,6 +11,7 @@ import Home from './Components/Pages/Home';
 import Register from './Components/Auth/Register';
 import Login from './Components/Auth/Login';
 import Alerts from './Components/layout/Alerts';
+import PrivateRoute from './Components/Routing/PrivateRoute';
 import ContactState from './Context/Contact/ContactState'
 import AuthState from './Context/Auth/AuthState';
 import AlertState from './Context/Alert/AlertState';
@@ -31,7 +32,7 @@ const App = () => {
               <div className="container">
                 <Alerts/>
           <Routes>
-            <Route exact path='/' element={<Home/>}/>
+            <Route exact path='/' element={<PrivateRoute><Home/></PrivateRoute>}/>
             <Route exact path='/about' element={<About/>}/>
             <Route exact path='/register' element={<Register/>}/>
             <Route exact path='/login' element={<Login/>}/>

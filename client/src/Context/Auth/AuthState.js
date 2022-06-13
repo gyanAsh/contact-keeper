@@ -40,7 +40,7 @@ const AuthState = (props) => {
                 payload: res.data
             });
         } catch (error) {
-            setTimeout(() => dispatch({ type: AUTH_ERROR }),5000)
+            dispatch({ type: AUTH_ERROR })
             
         }
     }
