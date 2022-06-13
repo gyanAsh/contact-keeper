@@ -52,11 +52,11 @@ const Register = () => {
           </h1>
           <form onSubmit={onSubmit}>
               <div className='form-group'>
-                  <lable htmlFor="email">Email</lable>
+                  <label htmlFor="email">Email</label>
                   <input type='email' name="email" value={email} onChange={onChange} required/>
               </div>
               <div className='form-group'>
-                  <lable htmlFor="password">Password</lable>
+                  <label htmlFor="password">Password</label>
                   <input type='password' name="password" value={password} onChange={onChange} required/>
               </div>
               <input type="submit" value="Login" className="btn btn-primary btn-black"/>

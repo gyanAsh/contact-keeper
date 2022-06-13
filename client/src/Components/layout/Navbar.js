@@ -1,20 +1,31 @@
-import React from 'react';
+import React,{Fragment,useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faAddressBook} from '@fortawesome/free-solid-svg-icons';
+import {faAddressBook,faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import AuthContext from '../../Context/Auth/AuthContext';
 
-const Navbar = ({title,icon}) => {
-  return (
-      <div className = "navbar bg-primary">
-          <h1>
-          <FontAwesomeIcon icon={faAddressBook} /> {title}
-          </h1>
-          <ul>
-              <li>
-                  <Link to='/'> Home</Link>
-              </li>
-              <li>
+const Navbar = ({ title }) => {
+    const authContext = useContext(AuthContext);
+    const { isAuthenticated, logout, user } = authContext;
+    const onLogout = () => {
+        console.log('oooggg')
+        logout();
+    }
+    const authLinks = (
+        <Fragment>
+            <li>Hello {user && user.name}</li>
+            <li>
+                <a onClick={onLogout} href='#!'>
+                    <FontAwesomeIcon icon={faSignOutAlt} />
+                    <span className="hide-sm">Logout</span>
+                </a>
+            </li>
+        </Fragment>
+    );
+    const guestLinks = (
+        <Fragment>
+            <li>
                   <Link to='/about'> About</Link>
               </li>
               <li>
@@ -23,6 +34,15 @@ const Navbar = ({title,icon}) => {
               <li>
                   <Link to='/login'> Login</Link>
               </li>
+        </Fragment>
+    );
+  return (
+      <div className = "navbar bg-primary">
+          <h1>
+          <FontAwesomeIcon icon={faAddressBook} /> {title}
+          </h1>
+          <ul>
+              {isAuthenticated ? authLinks : guestLinks}
           </ul>
     </div>
   )
@@ -31,7 +51,6 @@ const Navbar = ({title,icon}) => {
 
 Navbar.propTypes = {
     title: PropTypes.string.isRequired,
-    icon: PropTypes.string
 }
 
 Navbar.defaultProps = {

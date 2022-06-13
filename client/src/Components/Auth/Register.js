@@ -61,19 +61,19 @@ const Register = () => {
           </h1>
           <form onSubmit={onSubmit}>
               <div className='form-group'>
-                  <lable htmlFor="name">Name</lable>
+                  <label htmlFor="name">Name</label>
                   <input type='text' name="name" value={name} onChange={onChange} required/>
               </div>
               <div className='form-group'>
-                  <lable htmlFor="email">Email</lable>
+                  <label htmlFor="email">Email</label>
                   <input type='email' name="email" value={email} onChange={onChange} required/>
               </div>
               <div className='form-group'>
-                  <lable htmlFor="password">Password</lable>
+                  <label htmlFor="password">Password</label>
                   <input type='password' name="password" value={password} onChange={onChange} required/>
               </div>
               <div className='form-group'>
-                  <lable htmlFor="password2"> Confirm Password</lable>
+                  <label htmlFor="password2"> Confirm Password</label>
                   <input type='password' name="password2" value={password2} onChange={onChange} required/>
               </div>
               <input type="submit" value="Register" className="btn btn-primary btn-black"/>

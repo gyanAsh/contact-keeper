@@ -21,11 +21,11 @@ const ContactFilter = () => {
     }
 
   return (
-      <from>
+      <form>
           <input ref={text} type="text"
               placeholder="Filter Contacts...."
               onChange={onChange}/>
-    </from>
+    </form>
   )
 }
 
