@@ -3,7 +3,7 @@ import ContactContext from '../../Context/Contact/ContactContext';
 const ContactForm = () => {
 
     const contactContext = useContext(ContactContext);
-    const {current,clearCurrent} = contactContext;
+    const {current,clearCurrent,addContact,updateContact} = contactContext;
 
     const [contact, setContact] = useState({
         name: '',
@@ -13,7 +13,7 @@ const ContactForm = () => {
     });
 
     useEffect(() => {
-        if (current != null) {
+        if (current !== null) {
           setContact(current)
         } else {
             setContact({
@@ -38,11 +38,11 @@ const ContactForm = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        if (current == null) {
-            contactContext.addContact(contact);
+        if (current === null) {
+            addContact(contact);
         }
         else {
-            contactContext.updateContact(contact);
+            updateContact(contact);
         }
         clearAll();
     }

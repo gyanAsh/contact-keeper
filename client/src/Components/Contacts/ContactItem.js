@@ -7,7 +7,7 @@ import ContactContext from '../../Context/Contact/ContactContext';
 const ContactItem = ({ contact }) => {
     const contactContext = useContext(ContactContext);
     const {clearCurrent,setCurrent} = contactContext;
-    const { id, name, email, phone, type } = contact;
+    const { _id:id, name, email, phone, type } = contact;
     
     const deleteContact = () => {
         contactContext.deleteContact(id);
@@ -18,8 +18,7 @@ const ContactItem = ({ contact }) => {
           <h3 className="text-primary text-left">
               {name}{' '} <span
                   style={{float : 'right'}}
-                  className={
-                  'badge ' + (type === 'professional' ? 'badge-success' : 'badge-primary')}>
+                  className={'badge ' + (type === 'professional' ? 'badge-success' : 'badge-primary')}>
                   {type.charAt(0).toUpperCase().concat(type.slice(1))}</span>
           </h3>
           <ul className="list">
