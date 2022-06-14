@@ -4,12 +4,15 @@ import {faAddressBook,faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../Context/Auth/AuthContext';
-
+import ContactContext from '../../Context/Contact/ContactContext';
 const Navbar = ({ title }) => {
     const authContext = useContext(AuthContext);
+    const contactContext = useContext(ContactContext);
+
     const { isAuthenticated, logout, user } = authContext;
+    const {clearContacts} = contactContext;
     const onLogout = () => {
-        console.log('oooggg')
+        clearContacts();
         logout();
     }
     const authLinks = (
