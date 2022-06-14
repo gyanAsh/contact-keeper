@@ -47,8 +47,6 @@ const ContactState = props => {
 
         try {
             const res = await axios.post('api/v1/contacts', contact, config);
-            // contact.id = v4;
-            // dispatch({type:ADD_CONTACT,payload:contact});
             dispatch({type:ADD_CONTACT,payload:res.data})
 
         } catch (error) {
@@ -58,8 +56,14 @@ const ContactState = props => {
     }
 
     // Delete Contact
-    const deleteContact = (id) => {
-        dispatch({type:DELETE_CONTACT,payload:id})
+    const deleteContact = async (id) => {
+        try {
+            const res = await axios.delete(`api/v1/contacts/${id}`);
+            dispatch({type:DELETE_CONTACT,payload:id})
+        } catch (error) {
+            dispatch({type:CONTACT_ERROR, payload:error.response.msg})
+        }
+        
     }
 
     // Clear Contact
