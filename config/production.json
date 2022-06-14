@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://Ash:yonderwonder1738@contactkeepercluster.7zixacs.mongodb.net/?retryWrites=true&w=majority",
+    "jwtSecret":"itisasecret"
+}
